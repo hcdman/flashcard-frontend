@@ -12,14 +12,14 @@ function App() {
   const [showUpload, setShowUpload] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/collections')
+    fetch('https://flashcard-backend-ochre.vercel.app/api/collections')
       .then((res) => res.json())
       .then((data) => setCollections(data));
   }, []);
 
   useEffect(() => {
     if (selectedCollection) {
-      fetch(`http://localhost:3001/api/words/${selectedCollection}`)
+      fetch(`https://flashcard-backend-ochre.vercel.app/api/words/${selectedCollection}`)
         .then((res) => res.json())
         .then((data) => {
           setVocabularyData(data);
@@ -62,7 +62,7 @@ function App() {
     formData.append('file', file);
     formData.append('collectionName', newCollectionName);
 
-    fetch('http://localhost:3001/api/upload', {
+    fetch('https://flashcard-backend-ochre.vercel.app/api/upload', {
       method: 'POST',
       body: formData,
     })
@@ -73,7 +73,7 @@ function App() {
         setFile(null);
         setShowUpload(false); // Hide after upload
         // Refresh collections
-        fetch('http://localhost:3001/api/collections')
+        fetch('https://flashcard-backend-ochre.vercel.app/api/collections')
           .then((res) => res.json())
           .then((data) => setCollections(data));
       });
